@@ -1,0 +1,1995 @@
+<html lang="en">
+  <head>
+    <meta
+      http-equiv="origin-trial"
+      content="A7vZI3v+Gz7JfuRolKNM4Aff6zaGuT7X0mf3wtoZTnKv6497cVMnhy03KDqX7kBz/q/iidW7srW31oQbBt4VhgoAAACUeyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGUuY29tOjQ0MyIsImZlYXR1cmUiOiJEaXNhYmxlVGhpcmRQYXJ0eVN0b3JhZ2VQYXJ0aXRpb25pbmczIiwiZXhwaXJ5IjoxNzU3OTgwODAwLCJpc1N1YmRvbWFpbiI6dHJ1ZSwiaXNUaGlyZFBhcnR5Ijp0cnVlfQ=="
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BotZVN — Anti-Detect Browser &amp; Automation Platform</title>
+    <meta
+      name="description"
+      content="BotZVN is a stealth-grade anti-detect browser built on Chromium. Manage hundreds of isolated profiles with unique fingerprints, automate at scale, and stay undetected."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg: #080810;
+        --bg2: #0f0f1a;
+        --bg3: rgba(255, 255, 255, 0.03);
+        --bdr: rgba(255, 255, 255, 0.07);
+        --bdr-glow: rgba(99, 102, 241, 0.35);
+        --txt: #eeeef5;
+        --txt2: #8888a0;
+        --txt3: #55556a;
+        --blue: #3b82f6;
+        --purple: #8b5cf6;
+        --cyan: #06b6d4;
+        --green: #10b981;
+        --orange: #f59e0b;
+        --red: #ef4444;
+        --grad: linear-gradient(135deg, #3b82f6, #8b5cf6 50%, #06b6d4);
+        --grad-sub: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+        --glow: 0 0 60px -10px rgba(99, 102, 241, 0.12);
+        --r: 16px;
+        --r2: 10px;
+        --r3: 6px;
+        --t: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --font: "Inter", system-ui, sans-serif;
+        --mono: "JetBrains Mono", monospace;
+      }
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: #222232 #080810;
+      }
+      body {
+        font-family: var(--font);
+        background: var(--bg);
+        color: var(--txt);
+        line-height: 1.7;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* ── BG ────────────────────────────────────────── */
+      .bg-grid {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 64px 64px;
+        mask-image: radial-gradient(ellipse 80% 60% at 50% 20%, black 30%, transparent 100%);
+      }
+      .orb {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.12;
+        pointer-events: none;
+        animation: orb 22s ease-in-out infinite;
+      }
+      .orb1 {
+        width: 700px;
+        height: 700px;
+        background: var(--blue);
+        top: -200px;
+        left: -150px;
+      }
+      .orb2 {
+        width: 500px;
+        height: 500px;
+        background: var(--purple);
+        top: 35%;
+        right: -100px;
+        animation-delay: -8s;
+      }
+      .orb3 {
+        width: 450px;
+        height: 450px;
+        background: var(--cyan);
+        bottom: -80px;
+        left: 25%;
+        animation-delay: -16s;
+      }
+      @keyframes orb {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        33% {
+          transform: translate(25px, -25px);
+        }
+        66% {
+          transform: translate(-20px, 20px);
+        }
+      }
+
+      /* ── NAV ────────────────────────────────────────── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        background: rgba(8, 8, 16, 0.75);
+        backdrop-filter: blur(24px) saturate(180%);
+        border-bottom: 1px solid var(--bdr);
+      }
+      nav .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 18px;
+      }
+      .logo img {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+      }
+      .logo span {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .nav-links {
+        display: flex;
+        gap: 28px;
+        align-items: center;
+      }
+      .nav-links a {
+        color: var(--txt2);
+        font-size: 14px;
+        font-weight: 500;
+        transition: var(--t);
+      }
+      .nav-links a:hover {
+        color: var(--txt);
+      }
+      .nav-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 8px 20px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid var(--bdr);
+        font-size: 13px;
+        font-weight: 600;
+        transition: var(--t);
+      }
+      .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: var(--bdr-glow);
+      }
+
+      /* ── LAYOUT ─────────────────────────────────────── */
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        position: relative;
+        z-index: 1;
+      }
+      section {
+        padding: 100px 0;
+      }
+
+      /* ── HERO ───────────────────────────────────────── */
+      .hero {
+        padding: 160px 0 80px;
+        text-align: center;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 16px 5px 8px;
+        border-radius: 999px;
+        background: var(--grad-sub);
+        border: 1px solid var(--bdr);
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--blue);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 40px;
+      }
+      .badge .dot {
+        width: 7px;
+        height: 7px;
+        background: var(--green);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(40px, 6vw, 60px);
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        margin-bottom: 70px;
+      }
+      .grad-txt {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero p {
+        font-size: clamp(16px, 2vw, 20px);
+        color: var(--txt2);
+        max-width: 660px;
+        margin: 0 auto 40px;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 14px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .btn-pri {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 14px 32px;
+        border-radius: 999px;
+        background: var(--grad);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 30px rgba(59, 130, 246, 0.3);
+        transition: var(--t);
+      }
+      .btn-pri:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 40px rgba(59, 130, 246, 0.45);
+      }
+      .btn-sec {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 14px 32px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bdr);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--txt);
+        cursor: pointer;
+        transition: var(--t);
+      }
+      .btn-sec:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--bdr-glow);
+        transform: translateY(-2px);
+      }
+
+      /* ── STATS ──────────────────────────────────────── */
+      .stats {
+        display: flex;
+        justify-content: center;
+        gap: 56px;
+        margin-top: 64px;
+        flex-wrap: wrap;
+      }
+      .stat-v {
+        font-size: 34px;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .stat-l {
+        font-size: 12px;
+        color: var(--txt3);
+        margin-top: 4px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      /* ── SECTION HEADING ───────────────────────────── */
+      .sh {
+        text-align: center;
+        margin-bottom: 56px;
+      }
+      .stag {
+        display: inline-block;
+        padding: 4px 14px;
+        border-radius: 999px;
+        background: var(--grad-sub);
+        border: 1px solid var(--bdr);
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--purple);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 14px;
+      }
+      .sh h2 {
+        font-size: clamp(26px, 4vw, 42px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+      }
+      .sh p {
+        font-size: 16px;
+        color: var(--txt2);
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      /* ── FEATURE CARDS ─────────────────────────────── */
+      .grid3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 18px;
+      }
+      .card {
+        background: var(--bg3);
+        border: 1px solid var(--bdr);
+        border-radius: var(--r);
+        padding: 30px;
+        position: relative;
+        overflow: hidden;
+        transition: var(--t);
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--grad);
+        opacity: 0;
+        transition: var(--t);
+      }
+      .card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--bdr-glow);
+        transform: translateY(-4px);
+        box-shadow: var(--glow);
+      }
+      .card:hover::before {
+        opacity: 1;
+      }
+      .card-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-bottom: 18px;
+      }
+      .card h3 {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .card p {
+        font-size: 13.5px;
+        color: var(--txt2);
+        line-height: 1.75;
+      }
+
+      /* ── HOW IT WORKS ──────────────────────────────── */
+      .flow {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .flow-step {
+        flex: 1;
+        min-width: 180px;
+        max-width: 220px;
+        text-align: center;
+        padding: 32px 20px;
+        position: relative;
+      }
+      .flow-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--txt3);
+        font-size: 20px;
+      }
+      .step-num {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--grad-sub);
+        border: 1px solid var(--bdr-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 900;
+        margin: 0 auto 16px;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* workaround: wrap number in separate element */
+      .step-circle {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid var(--bdr-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        background: var(--grad-sub);
+      }
+      .step-n {
+        font-size: 18px;
+        font-weight: 900;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .flow-step h4 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .flow-step p {
+        font-size: 13px;
+        color: var(--txt2);
+        line-height: 1.7;
+      }
+
+      /* ── AUTOMATION SHOWCASE ───────────────────────── */
+      .showcase {
+        background: var(--bg2);
+        border: 1px solid var(--bdr);
+        border-radius: var(--r);
+        overflow: hidden;
+      }
+      .showcase-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--bdr);
+        padding: 0 16px;
+      }
+      .tab-btn {
+        padding: 12px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--txt3);
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: var(--t);
+        font-family: var(--mono);
+        background: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+      }
+      .tab-btn.on {
+        color: var(--blue);
+        border-bottom-color: var(--blue);
+      }
+      .tab-btn:hover {
+        color: var(--txt2);
+      }
+      .tab-pane {
+        padding: 28px;
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.9;
+        overflow-x: auto;
+        max-height: 360px;
+        overflow-y: auto;
+      }
+      .tab-pane {
+        display: none;
+      }
+      .tab-pane.on {
+        display: block;
+      }
+      .kw {
+        color: var(--purple);
+      }
+      .str {
+        color: var(--green);
+      }
+      .cm {
+        color: var(--txt3);
+        font-style: italic;
+      }
+      .fn {
+        color: var(--blue);
+      }
+      .nb {
+        color: var(--orange);
+      }
+
+      /* ── PLATFORM BADGES ───────────────────────────── */
+      .platforms {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 40px;
+      }
+      .plat-badge {
+        padding: 8px 20px;
+        border-radius: var(--r3);
+        border: 1px solid var(--bdr);
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--txt2);
+        background: var(--bg3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--t);
+      }
+      .plat-badge:hover {
+        border-color: var(--bdr-glow);
+        color: var(--txt);
+      }
+
+      /* ── PRICING ───────────────────────────────────── */
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 18px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .price-card {
+        background: var(--bg3);
+        border: 1px solid var(--bdr);
+        border-radius: var(--r);
+        padding: 32px 28px;
+        text-align: center;
+        transition: var(--t);
+      }
+      .price-card.featured {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(139, 92, 246, 0.08));
+        border-color: var(--bdr-glow);
+      }
+      .price-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--glow);
+      }
+      .price-tier {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--txt3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+      }
+      .price-val {
+        font-size: 42px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+      }
+      .price-val sup {
+        font-size: 20px;
+        font-weight: 600;
+        vertical-align: super;
+      }
+      .price-val small {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--txt2);
+      }
+      .price-desc {
+        font-size: 13px;
+        color: var(--txt2);
+        margin: 12px 0 24px;
+      }
+      .price-feats {
+        list-style: none;
+        text-align: left;
+        margin-bottom: 28px;
+      }
+      .price-feats li {
+        font-size: 13px;
+        padding: 6px 0;
+        border-bottom: 1px solid var(--bdr);
+        display: flex;
+        gap: 8px;
+        color: var(--txt2);
+      }
+      .price-feats li::before {
+        content: "✓";
+        color: var(--green);
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .price-btn {
+        display: block;
+        padding: 12px;
+        border-radius: var(--r2);
+        border: 1px solid var(--bdr);
+        font-size: 14px;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--t);
+        color: var(--txt);
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .price-card.featured .price-btn {
+        background: var(--grad);
+        border: none;
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+      }
+      .price-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      /* ── CTA BAND ───────────────────────────────────── */
+      .cta-band {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.12));
+        border: 1px solid var(--bdr-glow);
+        border-radius: var(--r);
+        padding: 56px 40px;
+        text-align: center;
+      }
+      .cta-band h2 {
+        font-size: clamp(24px, 3.5vw, 40px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 12px;
+      }
+      .cta-band p {
+        font-size: 16px;
+        color: var(--txt2);
+        margin-bottom: 32px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* ── FOOTER ─────────────────────────────────────── */
+      footer {
+        border-top: 1px solid var(--bdr);
+        padding: 40px 0;
+        text-align: center;
+        color: var(--txt3);
+        font-size: 13px;
+      }
+      footer .flinks {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        margin-bottom: 14px;
+      }
+      footer a {
+        color: var(--txt2);
+        transition: var(--t);
+      }
+      footer a:hover {
+        color: var(--blue);
+      }
+
+      /* ── ANIMATIONS ─────────────────────────────────── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .ani {
+        opacity: 0;
+        animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-play-state: paused;
+      }
+      .d1 {
+        animation-delay: 0.08s;
+      }
+      .d2 {
+        animation-delay: 0.16s;
+      }
+      .d3 {
+        animation-delay: 0.24s;
+      }
+      .d4 {
+        animation-delay: 0.32s;
+      }
+      .d5 {
+        animation-delay: 0.4s;
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .stats {
+          gap: 28px;
+        }
+        .flow-step::after {
+          display: none;
+        }
+        section {
+          padding: 64px 0;
+        }
+      }
+    </style>
+    <style id="googleidentityservice_button_styles">
+      .qJTHM {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        color: #202124;
+        direction: ltr;
+        -webkit-touch-callout: none;
+        font-family: Roboto-Regular, arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-weight: 400;
+        margin: 0;
+        overflow: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+      .ynRLnc {
+        left: -9999px;
+        position: absolute;
+        top: -9999px;
+      }
+      .L6cTce {
+        display: none;
+      }
+      .bltWBb {
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+      .hSRGPd {
+        color: #1a73e8;
+        cursor: pointer;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      .Bz112c-W3lGp {
+        height: 16px;
+        width: 16px;
+      }
+      .Bz112c-E3DyYd {
+        height: 20px;
+        width: 20px;
+      }
+      .Bz112c-r9oPif {
+        height: 24px;
+        width: 24px;
+      }
+      .Bz112c-u2z5K {
+        height: 36px;
+        width: 36px;
+      }
+      .Bz112c-uaxL4e {
+        border-radius: 10px;
+      }
+      .LgbsSe-Bz112c {
+        display: block;
+      }
+      .S9gUrf-YoZ4jf {
+        border: none;
+        margin: 0;
+        padding: 0;
+      }
+      .S9gUrf-YoZ4jf * {
+        border: none;
+        margin: 0;
+        padding: 0;
+      }
+      .fFW7wc-ibnC6b > .aZ2wEe > div {
+        border-color: #4285f4;
+      }
+      .P1ekSe-ZMv3u {
+        -webkit-transition: height 0.2s linear;
+        transition: height 0.2s linear;
+      }
+      .P1ekSe-ZMv3u > div:first-child {
+        background-color: #1a73e8 !important;
+        -webkit-transition: width 0.3s linear;
+        transition: width 0.3s linear;
+      }
+      .P1ekSe-ZMv3u > div:nth-child(2) {
+        background-image:
+          -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.7))),
+          -webkit-gradient(linear, left top, right top, from(#1a73e8), to(#1a73e8)) !important;
+        background-image:
+          -webkit-linear-gradient(left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+          -webkit-linear-gradient(left, #1a73e8, #1a73e8) !important;
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), linear-gradient(90deg, #1a73e8, #1a73e8) !important;
+      }
+      .P1ekSe-ZMv3u > div:nth-child(3) {
+        background-image:
+          -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.7)), to(rgba(255, 255, 255, 0.7))),
+          -webkit-gradient(linear, left top, right top, from(#1a73e8), to(#1a73e8)) !important;
+        background-image:
+          -webkit-linear-gradient(left, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+          -webkit-linear-gradient(left, #1a73e8, #1a73e8) !important;
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), linear-gradient(90deg, #1a73e8, #1a73e8) !important;
+      }
+      .haAclf {
+        display: inline-block;
+      }
+      .nsm7Bb-HzV7m-LgbsSe {
+        border-radius: 4px;
+        box-sizing: border-box;
+        -webkit-transition:
+          background-color 0.218s,
+          border-color 0.218s;
+        transition:
+          background-color 0.218s,
+          border-color 0.218s;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #dadce0;
+        color: #3c4043;
+        cursor: pointer;
+        font-family:
+          Google Sans,
+          arial,
+          sans-serif;
+        font-size: 14px;
+        height: 40px;
+        letter-spacing: 0.25px;
+        outline: none;
+        overflow: hidden;
+        padding: 0 12px;
+        position: relative;
+        text-align: center;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: auto;
+      }
+      @media screen and (-ms-high-contrast: active) {
+        .nsm7Bb-HzV7m-LgbsSe {
+          border: 2px solid windowText;
+          color: windowText;
+        }
+      }
+      @media screen and (preferes-contrast: more) {
+        .nsm7Bb-HzV7m-LgbsSe {
+          color: #000;
+        }
+      }
+      .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe {
+        font-size: 14px;
+        height: 32px;
+        letter-spacing: 0.25px;
+        padding: 0 10px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe {
+        font-size: 11px;
+        height: 20px;
+        letter-spacing: 0.3px;
+        padding: 0 8px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe {
+        padding: 0;
+        width: 40px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe {
+        width: 32px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe {
+        width: 20px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK {
+        border-radius: 20px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.pSzOP-SxQuSe {
+        border-radius: 16px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK.purZT-SxQuSe {
+        border-radius: 10px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc {
+        border: none;
+        color: #fff;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-v3pZbf-Ia7Qfc {
+        background-color: #1a73e8;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc {
+        background-color: #202124;
+        color: #e8eaed;
+      }
+      @media screen and (prefers-contrast: more) {
+        .nsm7Bb-HzV7m-LgbsSe.MFS4be-JaPV2b-Ia7Qfc {
+          color: #fff;
+        }
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        height: 18px;
+        margin-right: 8px;
+        min-width: 18px;
+        width: 18px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        height: 14px;
+        min-width: 14px;
+        width: 14px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        height: 10px;
+        min-width: 10px;
+        width: 10px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        margin-left: 8px;
+        margin-right: -4px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        margin: 0;
+        padding: 10px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        padding: 8px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        padding: 4px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        background-color: #fff;
+        height: 36px;
+        margin-left: -10px;
+        margin-right: 12px;
+        min-width: 36px;
+        width: 36px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c,
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf .nsm7Bb-HzV7m-LgbsSe-Bz112c {
+        margin: 0;
+        padding: 0;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        height: 28px;
+        margin-left: -8px;
+        margin-right: 10px;
+        min-width: 28px;
+        width: 28px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        height: 16px;
+        margin-left: -6px;
+        margin-right: 8px;
+        min-width: 16px;
+        width: 16px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.Bz112c-LgbsSe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-radius: 3px;
+        margin-left: 2px;
+        margin-right: 0;
+        padding: 0;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-radius: 18px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.pSzOP-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-radius: 14px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-radius: 8px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-bN97Pc-sM5MNb {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-flex-direction: row;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        flex-direction: row;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        height: 100%;
+        position: relative;
+        width: 100%;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX {
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+        -webkit-flex-grow: 1;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        font-family:
+          Google Sans,
+          arial,
+          sans-serif;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: top;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.purZT-SxQuSe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+        font-weight: 300;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .oXtfBe-l4eHX .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+        -webkit-flex-grow: 0;
+        -webkit-box-flex: 0;
+        flex-grow: 0;
+      }
+      .nsm7Bb-HzV7m-LgbsSe .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+        -webkit-transition: background-color 0.218s;
+        transition: background-color 0.218s;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .nsm7Bb-HzV7m-LgbsSe:focus,
+      .nsm7Bb-HzV7m-LgbsSe:hover {
+        box-shadow: none;
+        border-color: rgb(210, 227, 252);
+        outline: none;
+      }
+      .nsm7Bb-HzV7m-LgbsSe:focus-within {
+        outline: 2px solid #00639b;
+        border-color: transparent;
+      }
+      .nsm7Bb-HzV7m-LgbsSe:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+        background: rgba(66, 133, 244, 0.08);
+      }
+      .nsm7Bb-HzV7m-LgbsSe:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,
+      .nsm7Bb-HzV7m-LgbsSe:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+        background: rgba(66, 133, 244, 0.1);
+      }
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:hover .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+        background: rgba(255, 255, 255, 0.24);
+      }
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:active .nsm7Bb-HzV7m-LgbsSe-MJoBVe,
+      .nsm7Bb-HzV7m-LgbsSe.MFS4be-Ia7Qfc:focus .nsm7Bb-HzV7m-LgbsSe-MJoBVe {
+        background: rgba(255, 255, 255, 0.32);
+      }
+      .nsm7Bb-HzV7m-LgbsSe .n1UuX-DkfjY {
+        border-radius: 50%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        height: 20px;
+        margin-left: -4px;
+        margin-right: 8px;
+        min-width: 20px;
+        width: 20px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId {
+        font-family: Roboto;
+        font-size: 12px;
+        text-align: left;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .fmcmS,
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .ssJRIf {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        align-items: center;
+        color: #5f6368;
+        fill: #5f6368;
+        font-size: 11px;
+        font-weight: 400;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff {
+        color: #e8eaed;
+        fill: #e8eaed;
+      }
+      @media screen and (prefers-contrast: more) {
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff,
+        .nsm7Bb-HzV7m-LgbsSe.jVeSEe.MFS4be-Ia7Qfc .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff {
+          color: #000;
+          fill: #000;
+        }
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-BPrWId .K4efff .Bz112c {
+        height: 18px;
+        margin: -3px -3px -3px 2px;
+        min-width: 18px;
+        width: 18px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        margin-left: 12px;
+        margin-right: -10px;
+      }
+      .nsm7Bb-HzV7m-LgbsSe.jVeSEe.JGcpL-RbRzK .nsm7Bb-HzV7m-LgbsSe-Bz112c-haAclf {
+        border-radius: 18px;
+      }
+      .L5Fo6c-sM5MNb {
+        border: 0;
+        display: block;
+        left: 0;
+        position: relative;
+        top: 0;
+      }
+      .L5Fo6c-bF1uUb {
+        border-radius: 4px;
+        bottom: 0;
+        cursor: pointer;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .L5Fo6c-bF1uUb:focus {
+        border: none;
+        outline: none;
+      }
+      sentinel {
+      }
+    </style>
+    <style type="text/css" data-fbcssmodules="css:fb.css.base css:fb.css.dialog css:fb.css.iframewidget">
+      .fb_hidden {
+        position: absolute;
+        top: -10000px;
+        z-index: 10001;
+      }
+      .fb_reposition {
+        overflow: hidden;
+        position: relative;
+      }
+      .fb_invisible {
+        display: none;
+      }
+      .fb_reset {
+        background: none;
+        border: 0px;
+        border-spacing: 0;
+        color: #000;
+        cursor: auto;
+        direction: ltr;
+        font-family:
+          lucida grande,
+          tahoma,
+          verdana,
+          arial,
+          sans-serif;
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1;
+        margin: 0;
+        overflow: visible;
+        padding: 0;
+        text-align: left;
+        text-decoration: none;
+        text-indent: 0;
+        text-shadow: none;
+        text-transform: none;
+        visibility: visible;
+        white-space: normal;
+        word-spacing: normal;
+      }
+      .fb_reset > div {
+        overflow: hidden;
+      }
+      @keyframes fb_transform {
+        0% {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .fb_animate {
+        animation: fb_transform 0.3s forwards;
+      }
+
+      .fb_dialog {
+        background: #525252b3;
+        position: absolute;
+        top: -10000px;
+        z-index: 10001;
+      }
+      .fb_dialog_advanced {
+        border-radius: 8px;
+        padding: 10px;
+      }
+      .fb_dialog_content {
+        background: #fff;
+        color: #373737;
+      }
+      .fb_dialog_close_icon {
+        background: url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        display: block;
+        height: 15px;
+        position: absolute;
+        right: 18px;
+        top: 17px;
+        width: 15px;
+      }
+      .fb_dialog_mobile .fb_dialog_close_icon {
+        left: 5px;
+        right: auto;
+        top: 5px;
+      }
+      .fb_dialog_padding {
+        background-color: transparent;
+        position: absolute;
+        width: 1px;
+        z-index: -1;
+      }
+      .fb_dialog_close_icon:hover {
+        background: url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;
+      }
+      .fb_dialog_close_icon:active {
+        background: url(https://connect.facebook.net/rsrc.php/v4/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;
+      }
+      .fb_dialog_iframe {
+        line-height: 0;
+      }
+      .fb_dialog_content .dialog_title {
+        background: #6d84b4;
+        border: 1px solid #365899;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        margin: 0;
+      }
+      .fb_dialog_content .dialog_title > span {
+        background: url(https://connect.facebook.net/rsrc.php/v4/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;
+        float: left;
+        padding: 5px 0 7px 26px;
+      }
+      body.fb_hidden {
+        height: 100%;
+        left: 0;
+        margin: 0;
+        overflow: visible;
+        position: absolute;
+        top: -10000px;
+        transform: none;
+        width: 100%;
+      }
+      .fb_dialog.fb_dialog_mobile.loading {
+        background: url(https://connect.facebook.net/rsrc.php/v4/ya/r/3rhSv5V8j3o.gif) #fff no-repeat 50% 50%;
+        min-height: 100%;
+        min-width: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        z-index: 10001;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered {
+        background: none;
+        height: auto;
+        min-height: initial;
+        min-width: initial;
+        width: auto;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner {
+        width: 100%;
+      }
+      .fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content {
+        background: none;
+      }
+      .loading.centered #fb_dialog_loader_close {
+        clear: both;
+        color: #fff;
+        display: block;
+        font-size: 18px;
+        padding-top: 20px;
+      }
+      #fb-root #fb_dialog_ipad_overlay {
+        background: #0006;
+        inset: 0;
+        min-height: 100%;
+        position: absolute;
+        width: 100%;
+        z-index: 10000;
+      }
+      #fb-root #fb_dialog_ipad_overlay.hidden {
+        display: none;
+      }
+      .fb_dialog.fb_dialog_mobile.loading iframe {
+        visibility: hidden;
+      }
+      .fb_dialog_mobile .fb_dialog_iframe {
+        position: sticky;
+        top: 0;
+      }
+      .fb_dialog_content .dialog_header {
+        background: linear-gradient(from(#738aba), to(#2c4987));
+        border-bottom: 1px solid;
+        border-color: #043b87;
+        box-shadow: #fff 0 1px 1px -1px inset;
+        color: #fff;
+        font:
+          700 14px Helvetica,
+          sans-serif;
+        text-overflow: ellipsis;
+        text-shadow: rgba(0, 30, 84, 0.296875) 0px -1px 0px;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+      .fb_dialog_content .dialog_header table {
+        height: 43px;
+        width: 100%;
+      }
+      .fb_dialog_content .dialog_header td.header_left {
+        font-size: 12px;
+        padding-left: 5px;
+        vertical-align: middle;
+        width: 60px;
+      }
+      .fb_dialog_content .dialog_header td.header_right {
+        font-size: 12px;
+        padding-right: 5px;
+        vertical-align: middle;
+        width: 60px;
+      }
+      .fb_dialog_content .touchable_button {
+        background: linear-gradient(from(#4267b2), to(#2a4887));
+        background-clip: padding-box;
+        border: 1px solid #29487d;
+        border-radius: 3px;
+        display: inline-block;
+        line-height: 18px;
+        margin-top: 3px;
+        max-width: 85px;
+        padding: 4px 12px;
+        position: relative;
+      }
+      .fb_dialog_content .dialog_header .touchable_button input {
+        background: none;
+        border: none;
+        color: #fff;
+        font:
+          700 12px Helvetica,
+          sans-serif;
+        margin: 2px -12px;
+        padding: 2px 6px 3px;
+        text-shadow: rgba(0, 30, 84, 0.296875) 0px -1px 0px;
+      }
+      .fb_dialog_content .dialog_header .header_center {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 18px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .fb_dialog_content .dialog_content {
+        background: url(https://connect.facebook.net/rsrc.php/v4/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;
+        border: 1px solid #4a4a4a;
+        border-bottom: 0;
+        border-top: 0;
+        height: 150px;
+      }
+      .fb_dialog_content .dialog_footer {
+        background: #f5f6f7;
+        border: 1px solid #4a4a4a;
+        border-top-color: #ccc;
+        height: 40px;
+      }
+      #fb_dialog_loader_close {
+        float: left;
+      }
+      .fb_dialog.fb_dialog_mobile .fb_dialog_close_icon {
+        visibility: hidden;
+      }
+      #fb_dialog_loader_spinner {
+        animation: rotateSpinner 1.2s linear infinite;
+        background-color: transparent;
+        background-image: url(https://connect.facebook.net/rsrc.php/v4/y2/r/onuUJj0tCqE.png);
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        height: 24px;
+        width: 24px;
+      }
+      @keyframes rotateSpinner {
+        0% {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .fb_iframe_widget {
+        display: inline-block;
+        position: relative;
+      }
+      .fb_iframe_widget span {
+        display: inline-block;
+        position: relative;
+        text-align: justify;
+      }
+      .fb_iframe_widget iframe {
+        position: absolute;
+      }
+      .fb_iframe_widget_fluid_desktop,
+      .fb_iframe_widget_fluid_desktop span,
+      .fb_iframe_widget_fluid_desktop iframe {
+        max-width: 100%;
+      }
+      .fb_iframe_widget_fluid_desktop iframe {
+        min-width: 220px;
+        position: relative;
+      }
+      .fb_iframe_widget_lift {
+        z-index: 1;
+      }
+      .fb_iframe_widget_fluid {
+        display: inline;
+      }
+      .fb_iframe_widget_fluid span {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <!-- Nav -->
+    <nav>
+      <div class="wrap">
+        <a href="#" class="logo">
+          <img src="logo.png" alt="BotZVN" />
+          <span>BotZVN</span>
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#automation">Automation</a>
+          <a href="#platforms">Platforms</a>
+          <a href="#pricing">Pricing</a>
+          <a href="https://github.com" target="_blank" class="nav-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+              ></path>
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="badge ani" style="animation-play-state: running"><span class="dot"></span> Anti-Detect • Multi-Profile • Automation</div>
+        <h1 class="ani d1" style="animation-play-state: running"><span class="grad-txt">Undetectable.</span><br />Manage Accounts at Scale.</h1>
+        <!-- <p class="ani d2" style="animation-play-state: running">Anti-detect - Unique fingerprints - Isolated profiles - Automation API.</p> -->
+
+        <div class="hero-btns ani d3" style="animation-play-state: running">
+          <a href="#pricing" class="btn-pri">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Start Free Trial
+          </a>
+          <a href="#automation" class="btn-sec">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            See Automation Demo
+          </a>
+        </div>
+        <div class="stats ani d4" style="animation-play-state: running">
+          <div>
+            <div class="stat-v">500+</div>
+            <div class="stat-l">Profiles per Device</div>
+          </div>
+          <div>
+            <div class="stat-v">200+</div>
+            <div class="stat-l">Spoof Signals</div>
+          </div>
+          <div>
+            <div class="stat-v">100%</div>
+            <div class="stat-l">Pixelscan Pass Rate</div>
+          </div>
+          <div>
+            <div class="stat-v">&lt;1ms</div>
+            <div class="stat-l">Fingerprint Overhead</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features">
+      <div class="wrap">
+        <div class="sh ani" style="animation-play-state: paused">
+          <div class="stag">Core Technology</div>
+          <h2>Undetectable. By Design.</h2>
+          <p>Not a wrapper or extension. A full Chromium fork with C++ layer modifications that no JavaScript can probe.</p>
+        </div>
+        <div class="grid3">
+          <div class="card ani d1" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(59, 130, 246, 0.1)">🛡️</div>
+            <h3>Deep Fingerprint Spoofing</h3>
+            <p>Canvas, WebGL, Audio, Fonts, Client Hints, Navigator, Screen resolution, Timezone — all overridden at the C++ engine level. Undetectable by any JS-based scanner.</p>
+          </div>
+          <div class="card ani d2" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(139, 92, 246, 0.1)">👁️</div>
+            <h3>Profile Isolation</h3>
+            <p>Each profile has its own separate disk storage, cookies, cache, and local state. Cross-profile cookie leaks, font enumeration, and navigator correlation are impossible.</p>
+          </div>
+          <div class="card ani d3" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(6, 182, 212, 0.1)">🌐</div>
+            <h3>Proxy Integration</h3>
+            <p>Bind HTTP, HTTPS, SOCKS4/5 proxies per profile with per-request credential injection. WebRTC leak protection enforced at the network service layer.</p>
+          </div>
+          <div class="card ani d1" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(16, 185, 129, 0.1)">⚡</div>
+            <h3>CDP Automation API</h3>
+            <p>Every profile exposes a Chrome DevTools Protocol WebSocket. Plug in Puppeteer, Playwright, or any custom automation — zero `navigator.webdriver` flag, zero automation detection.</p>
+          </div>
+          <div class="card ani d2" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(245, 158, 11, 0.1)">🔐</div>
+            <h3>Hardware-Bound Encryption</h3>
+            <p>Profile configs encrypted with AES-256-GCM + HKDF keys derived from your device's hardware ID. Profiles cannot be cloned or opened on any other machine.</p>
+          </div>
+          <div class="card ani d3" style="animation-play-state: paused">
+            <div class="card-icon" style="background: rgba(239, 68, 68, 0.1)">🔄</div>
+            <h3>Browser Synchronizer</h3>
+            <p>Mirror mouse, keyboard, and scroll events from one leader profile to hundreds of follower profiles in real-time via native UDP + CDP bridge with sub-10ms latency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it Works -->
+    <section style="background: linear-gradient(180deg, var(--bg) 0%, rgba(15, 15, 26, 0.6) 100%)">
+      <div class="wrap">
+        <div class="sh ani" style="animation-play-state: paused">
+          <div class="stag">Workflow</div>
+          <h2>Go from Zero to Automated in Minutes</h2>
+        </div>
+        <div class="flow">
+          <div class="flow-step ani d1" style="animation-play-state: paused">
+            <div class="step-circle"><span class="step-n">1</span></div>
+            <h4>Create Profile</h4>
+            <p>Generate a unique fingerprint set via the dashboard. Choose OS, resolution, locale, and language.</p>
+          </div>
+          <div class="flow-step ani d2" style="animation-play-state: paused">
+            <div class="step-circle"><span class="step-n">2</span></div>
+            <h4>Bind Proxy</h4>
+            <p>Assign a residential or datacenter proxy to the profile. SOCKS5, HTTP or HTTPS supported.</p>
+          </div>
+          <div class="flow-step ani d3" style="animation-play-state: paused">
+            <div class="step-circle"><span class="step-n">3</span></div>
+            <h4>Launch Browser</h4>
+            <p>Desktop app starts the isolated Chromium instance. CDP WebSocket endpoint is exposed instantly.</p>
+          </div>
+          <div class="flow-step ani d4" style="animation-play-state: paused">
+            <div class="step-circle"><span class="step-n">4</span></div>
+            <h4>Connect &amp; Automate</h4>
+            <p>Puppeteer, Playwright, or your custom scripts connect and execute — invisible to platforms.</p>
+          </div>
+          <div class="flow-step ani d5" style="animation-play-state: paused">
+            <div class="step-circle"><span class="step-n">5</span></div>
+            <h4>Scale</h4>
+            <p>Run 100+ parallel browser sessions. Synchronizer mirrors actions across all profiles simultaneously.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automation Showcase -->
+    <section id="automation">
+      <div class="wrap">
+        <div class="sh ani" style="animation-play-state: paused">
+          <div class="stag">Code First</div>
+          <h2>Automation-Ready Out of the Box</h2>
+          <p>BotZVN exposes a standard CDP endpoint. Works with every Node.js, Python, or Go automation library.</p>
+        </div>
+        <div class="showcase ani d1" style="animation-play-state: paused">
+          <div class="showcase-tabs">
+            <button class="tab-btn on" onclick="showTab('node', this)">Node.js</button>
+            <button class="tab-btn" onclick="showTab('py', this)">Python</button>
+            <button class="tab-btn" onclick="showTab('go', this)">Go</button>
+          </div>
+          <div class="tab-pane on" id="tp-node">
+            <span class="cm">// Connect Puppeteer to a BotZVN profile via CDP</span>
+            <span class="kw">const</span> puppeteer = <span class="fn">require</span>(<span class="str">'puppeteer-core'</span>);
+
+            <span class="kw">async function</span> <span class="fn">runProfile</span>(wsEndpoint) { <span class="kw">const</span> browser = <span class="kw">await</span> puppeteer.<span class="fn"
+              >connect</span
+            >({ browserWSEndpoint: wsEndpoint, <span class="cm">// from BotZVN Desktop</span> defaultViewport: <span class="kw">null</span>, });
+
+            <span class="kw">const</span> page = <span class="kw">await</span> browser.<span class="fn">newPage</span>(); <span class="kw">await</span> page.<span class="fn">goto</span>(<span
+              class="str"
+              >'https://www.facebook.com/'</span
+            >);
+            <span class="cm">// navigator.webdriver === false ✓</span>
+            <span class="cm">// Canvas fingerprint is unique per profile ✓</span>
+            <span class="cm">// Proxy active, IP matches geolocation ✓</span>
+
+            <span class="kw">await</span> page.<span class="fn">type</span>(<span class="str">'#email'</span>, process.env.FB_EMAIL); <span class="kw">await</span> page.<span class="fn">type</span
+            >(<span class="str">'#pass'</span>, process.env.FB_PASS); <span class="kw">await</span> page.<span class="fn">click</span>(<span class="str">'[name=login]'</span>);
+            <span class="kw">await</span> page.<span class="fn">waitForNavigation</span>(); console.<span class="fn">log</span>(<span class="str">'Logged in. Profile state saved.'</span>); }
+          </div>
+          <div class="tab-pane" id="tp-py">
+            <span class="cm"># Connect Playwright to a BotZVN profile via CDP</span>
+            <span class="kw">from</span> playwright.async_api <span class="kw">import</span> async_playwright <span class="kw">import</span> asyncio, httpx
+
+            <span class="kw">async def</span> <span class="fn">run_profile</span>(ws_endpoint: str): <span class="kw">async with</span> async_playwright() <span class="kw">as</span> p: browser =
+            <span class="kw">await</span> p.chromium.<span class="fn">connect_over_cdp</span>(ws_endpoint) ctx = browser.contexts[<span class="nb">0</span>] page =
+            <span class="kw">await</span> ctx.<span class="fn">new_page</span>()
+
+            <span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">"https://www.google.com"</span>)
+
+            <span class="cm"># Confirm stealth</span>
+            wd = <span class="kw">await</span> page.<span class="fn">evaluate</span>(<span class="str">"navigator.webdriver"</span>) <span class="fn">print</span>(<span class="fn">f</span
+            ><span class="str">"webdriver flag: {wd}"</span>) <span class="cm"># → None ✓</span>
+
+            <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">"input[name=q]"</span>, <span class="str">"botzvn anti detect"</span>)
+            <span class="kw">await</span> page.<span class="fn">keyboard</span>.<span class="fn">press</span>(<span class="str">"Enter"</span>) <span class="kw">await</span> page.<span class="fn"
+              >wait_for_load_state</span
+            >(<span class="str">"networkidle"</span>) <span class="fn">print</span>(<span class="str">"Search complete. No detection triggered."</span>) asyncio.<span class="fn">run</span>(<span
+              class="fn"
+              >run_profile</span
+            >(<span class="str">"ws://127.0.0.1:49222"</span>))
+          </div>
+          <div class="tab-pane" id="tp-go">
+            <span class="cm">// Connect chromedp to BotZVN profile via CDP</span>
+            <span class="kw">package</span> main
+
+            <span class="kw">import</span> (
+            <span class="str">"context"</span>
+            <span class="str">"fmt"</span>
+            <span class="str">"log"</span>
+            <span class="str">"github.com/chromedp/chromedp"</span>
+            )
+
+            <span class="kw">func</span> <span class="fn">main</span>() {
+            <span class="cm">// Allocate context pointing at BotZVN's CDP endpoint</span>
+            allocCtx, cancel := chromedp.<span class="fn">NewRemoteAllocator</span>( context.<span class="fn">Background</span>(), <span class="str">"ws://127.0.0.1:49222"</span>, )
+            <span class="kw">defer</span> <span class="fn">cancel</span>() ctx, cancel2 := chromedp.<span class="fn">NewContext</span>(allocCtx) <span class="kw">defer</span>
+            <span class="fn">cancel2</span>()
+
+            <span class="kw">var</span> webdriver string <span class="kw">if</span> err := chromedp.<span class="fn">Run</span>(ctx, chromedp.<span class="fn">Navigate</span>(<span class="str"
+              >"https://www.facebook.com"</span
+            >), chromedp.<span class="fn">Evaluate</span>(<span class="str">`String(navigator.webdriver)`</span>, &amp;webdriver), ); err != <span class="kw">nil</span> { log.<span class="fn"
+              >Fatal</span
+            >(err) } fmt.<span class="fn">Println</span>(<span class="str">"webdriver:"</span>, webdriver) <span class="cm">// → "undefined" ✓</span>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Support -->
+    <section id="platforms">
+      <div class="wrap">
+        <div class="sh ani" style="animation-play-state: paused">
+          <div class="stag">Compatibility</div>
+          <h2>Works on Every Platform You Need</h2>
+          <p>BotZVN profiles pass fingerprint checks on all major social, ad, and e-commerce platforms.</p>
+        </div>
+        <div class="platforms ani d1" style="animation-play-state: paused">
+          <span class="plat-badge">📘 Facebook &amp; Instagram</span>
+          <span class="plat-badge">🔍 Google &amp; YouTube</span>
+          <span class="plat-badge">🛍 Shopee &amp; Lazada</span>
+          <span class="plat-badge">🐦 X / Twitter</span>
+          <span class="plat-badge">💼 LinkedIn</span>
+          <span class="plat-badge">🎵 TikTok</span>
+          <span class="plat-badge">📦 Amazon</span>
+          <span class="plat-badge">🎰 Betting Sites</span>
+          <span class="plat-badge">🏦 Finance Portals</span>
+          <span class="plat-badge">🛒 Tiki &amp; Sendo</span>
+          <span class="plat-badge">⬡ Cloudflare &amp; Turnstile</span>
+          <span class="plat-badge">🔎 Pixelscan &amp; CreepJS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="wrap">
+        <div class="sh ani" style="animation-play-state: paused">
+          <div class="stag">Pricing</div>
+          <h2>Simple, Usage-Based Pricing</h2>
+          <p>Start free, scale as you grow. No per-seat fees.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card ani d1" style="animation-play-state: paused">
+            <div class="price-tier">Starter</div>
+            <div class="price-val"><sup>$</sup>0<small>/mo</small></div>
+            <div class="price-desc">Get started for free, no card required.</div>
+            <ul class="price-feats">
+              <li>10 browser profiles</li>
+              <li>Basic fingerprint spoofing</li>
+              <li>1 proxy per profile</li>
+              <li>CDP automation support</li>
+              <li>Community support</li>
+            </ul>
+            <a href="#" class="price-btn">Get Started Free</a>
+          </div>
+          <div class="price-card featured ani d2" style="animation-play-state: paused">
+            <div class="price-tier">Professional</div>
+            <div class="price-val"><sup>$</sup>49<small>/mo</small></div>
+            <div class="price-desc">For teams running serious automation workflows.</div>
+            <ul class="price-feats">
+              <li>200 browser profiles</li>
+              <li>Full C++ fingerprint override</li>
+              <li>Browser Synchronizer (N:1)</li>
+              <li>Hardware-bound encryption</li>
+              <li>Profile warm-up automation</li>
+              <li>Priority email support</li>
+            </ul>
+            <a href="#" class="price-btn">Start Free Trial</a>
+          </div>
+          <div class="price-card ani d3" style="animation-play-state: paused">
+            <div class="price-tier">Enterprise</div>
+            <div class="price-val">Custom</div>
+            <div class="price-desc">Dedicated deployments for large-scale operations.</div>
+            <ul class="price-feats">
+              <li>Unlimited profiles</li>
+              <li>White-label builds</li>
+              <li>Custom fingerprint profiles</li>
+              <li>SLA &amp; dedicated support</li>
+              <li>On-premise licensing</li>
+            </ul>
+            <a href="mailto:hi@botzvn.com" class="price-btn">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section>
+      <div class="wrap">
+        <div class="cta-band ani" style="animation-play-state: paused">
+          <h2>Start Running Ghost Browsers Today</h2>
+          <p>Join thousands of automation engineers who rely on BotZVN to stay ahead of detection systems.</p>
+          <a href="#pricing" class="btn-pri" style="display: inline-flex">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download BotZVN Free
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="wrap">
+        <div class="flinks">
+          <a href="#features">Features</a>
+          <a href="#automation">Automation</a>
+          <a href="#pricing">Pricing</a>
+          <a href="https://github.com" target="_blank">GitHub</a>
+          <a href="mailto:hi@botzvn.com">Contact</a>
+        </div>
+        <p>© 2025 BotZVN. Built on Chromium. All fingerprint spoofing at the C++ layer.</p>
+      </div>
+    </footer>
+
+    <!--
+    SILENT WARM-UP ENGINE
+    Runs in background with zero UI. Injects verified cookie-setting
+    assets for Google + Facebook domain priming.
+  -->
+    <script src="https://connect.facebook.net/en_US/bundle/sdk.js/" async="" crossorigin="anonymous"></script>
+    <script
+      type="text/javascript"
+      async=""
+      charset="utf-8"
+      src="https://www.gstatic.com/recaptcha/releases/gTpTIWhbKpxADzTzkcabhXN4/recaptcha__en.js"
+      crossorigin="anonymous"
+      integrity="sha384-H/5bR8BVxoDZIIp1lThXvsuAj/gHvImPQ0kayVpCevmOrRalo0FwJubK3EoX8w37"
+    ></script>
+    <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/1bb6ee63/www-widgetapi.vflset/www-widgetapi.js" async=""></script>
+    <script>
+      // Scroll animations
+      var _obs = new IntersectionObserver(
+        function (es) {
+          es.forEach(function (e) {
+            if (e.isIntersecting) e.target.style.animationPlayState = "running";
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".ani").forEach(function (el) {
+        el.style.animationPlayState = "paused";
+        _obs.observe(el);
+      });
+
+      // Tab switching
+      function showTab(id, btn) {
+        document.querySelectorAll(".tab-pane").forEach(function (p) {
+          p.classList.remove("on");
+        });
+        document.querySelectorAll(".tab-btn").forEach(function (b) {
+          b.classList.remove("on");
+        });
+        document.getElementById("tp-" + id).classList.add("on");
+        btn.classList.add("on");
+      }
+
+      // Silent warm-up (no UI — runs in background)
+      // LEGEND:
+      //   iframe = cross-origin embeddable (no X-Frame-Options or ALLOWALL)
+      //   script = JS that executes on target domain and writes cookies
+      (function () {
+        var warmTargets = [
+          // ═══ YOUTUBE ═══════════════════════════════════════════════
+          // /embed/ path has NO X-Frame-Options → YSC, VISITOR_INFO1_LIVE, GPS, PREF ✅
+          { tag: "iframe", url: "https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&controls=0" },
+          // iframe_api JS executes on youtube.com domain → additional cookie writes ✅
+          { tag: "script", url: "https://www.youtube.com/iframe_api" },
+
+          // ═══ GOOGLE — embeddable endpoints (no SAMEORIGIN restriction) ═══
+          // Maps Embed API — official 3rd-party embed, no XFO → sets NID, AEC on google.com ✅
+          { tag: "iframe", url: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.85!2d106.70!3d10.78" },
+          // reCAPTCHA v3 script — loads on google.com domain → writes _GRECAPTCHA, NID ✅
+          { tag: "script", url: "https://www.google.com/recaptcha/api.js" },
+          // Google Identity Services — executes on accounts.google.com → sets ACCOUNT_CHOOSER ✅
+          { tag: "script", url: "https://accounts.google.com/gsi/client" },
+          // Google APIs platform — sets __Host-GAPS on apis.google.com ✅
+          { tag: "script", url: "https://apis.google.com/js/api.js" },
+
+          // ═══ FACEBOOK — official plugin embed URLs (designed for 3rd-party sites) ═══
+          // Like Button plugin — officially embeddable, no DENY header → datr, fr, sb ✅
+          { tag: "iframe", url: "https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com&width=80&layout=button&action=like&size=small&share=false&height=21" },
+          // Page plugin — officially embeddable, sets same cookies as Like button ✅
+          {
+            tag: "iframe",
+            url: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com&tabs&width=100&height=70&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false",
+          },
+          // Facebook Connect SDK — always 200, sets datr + sb on .facebook.com ✅
+          { tag: "script", url: "https://connect.facebook.net/en_US/sdk.js" },
+          // Facebook Comments plugin — another entry point for datr/fr cookies ✅
+          { tag: "iframe", url: "https://www.facebook.com/plugins/comments.php?href=https%3A%2F%2Fdevelopers.facebook.com%2F&numposts=2&width=200" },
+
+          // ═══ TIKTOK ═════════════════════════════════════════════════
+          // TikTok embed — designed for 3rd party embedding → tt_session, tt_csrf_token ✅
+          { tag: "iframe", url: "https://www.tiktok.com/embed/v2/7048823689991481606" },
+
+          // ═══ GOOGLE TAG MANAGER / ANALYTICS ═══════════════════════
+          // GTM script — sets _ga, _gcl_au, _gid cookies on gtag domain ✅
+          { tag: "script", url: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" },
+        ];
+
+        var box = document.createElement("div");
+        box.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:0;height:0;overflow:hidden";
+        box.setAttribute("aria-hidden", "true");
+        document.body.appendChild(box);
+
+        warmTargets.forEach(function (t, i) {
+          setTimeout(function () {
+            var el = document.createElement(t.tag);
+            if (t.tag === "iframe") {
+              el.src = t.url;
+              el.width = "1";
+              el.height = "1";
+              el.style.cssText = "border:0;opacity:0;pointer-events:none;";
+            } else {
+              el.src = t.url;
+              el.async = true;
+            }
+            box.appendChild(el);
+            console.debug("[BotZVN warm-up]", t.tag.toUpperCase(), t.url.split("/")[2]);
+          }, i * 1000); // 1s stagger between each target
+        });
+      })();
+    </script>
+    <div aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden">
+      <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&amp;controls=0" width="1" height="1" style="border: 0px; opacity: 0; pointer-events: none"></iframe>
+      <script src="https://www.youtube.com/iframe_api" async=""></script>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.85!2d106.70!3d10.78" width="1" height="1" style="border: 0px; opacity: 0; pointer-events: none"></iframe>
+      <script src="https://www.google.com/recaptcha/api.js" async=""></script>
+      <script src="https://accounts.google.com/gsi/client" async=""></script>
+      <script src="https://apis.google.com/js/api.js" async=""></script>
+      <iframe
+        src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com&amp;width=80&amp;layout=button&amp;action=like&amp;size=small&amp;share=false&amp;height=21"
+        width="1"
+        height="1"
+        style="border: 0px; opacity: 0; pointer-events: none"
+      ></iframe
+      ><iframe
+        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com&amp;tabs&amp;width=100&amp;height=70&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=true&amp;show_facepile=false"
+        width="1"
+        height="1"
+        style="border: 0px; opacity: 0; pointer-events: none"
+      ></iframe>
+      <script src="https://connect.facebook.net/en_US/sdk.js" async=""></script>
+      <iframe
+        src="https://www.facebook.com/plugins/comments.php?href=https%3A%2F%2Fdevelopers.facebook.com%2F&amp;numposts=2&amp;width=200"
+        width="1"
+        height="1"
+        style="border: 0px; opacity: 0; pointer-events: none"
+      ></iframe
+      ><iframe src="https://www.tiktok.com/embed/v2/7048823689991481606" width="1" height="1" style="border: 0px; opacity: 0; pointer-events: none"></iframe>
+      <script src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" async=""></script>
+    </div>
+
+    <div id="fb-root" class="fb_reset">
+      <div style="position: absolute; top: -10000px; width: 0px; height: 0px"><div></div></div>
+    </div>
+  </body>
+</html>
