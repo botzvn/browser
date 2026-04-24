@@ -1880,37 +1880,6 @@
         document.getElementById("tp-" + id).classList.add("on");
         btn.classList.add("on");
       }
-
-      // Silent warm-up — iframe only, no script injection
-      (function () {
-        var iframes = [
-          // YouTube embed → YSC, VISITOR_INFO1_LIVE, GPS, PREF ✅
-          "https://www.youtube.com/embed/jNQXAC9IVRw?autoplay=0&controls=0",
-          // Google Maps embed → NID, AEC on google.com ✅
-          "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d249.85!2d106.70!3d10.78",
-          // Facebook Page plugin (same — designed for embedding) → datr, fr ✅
-          "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com&tabs&width=100&height=70&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=false",
-          // TikTok /embed/v2/ URL (official video embed endpoint) → tt_session ✅
-          "https://www.tiktok.com/embed/v2/7048823689991481606",
-        ];
-
-        var box = document.createElement("div");
-        box.style.cssText = "position:absolute;left:-9999px;top:-9999px;width:0;height:0;overflow:hidden";
-        box.setAttribute("aria-hidden", "true");
-        document.body.appendChild(box);
-
-        iframes.forEach(function (url, i) {
-          setTimeout(function () {
-            var el = document.createElement("iframe");
-            el.src = url;
-            el.width = "1";
-            el.height = "1";
-            el.style.cssText = "border:0;opacity:0;pointer-events:none;";
-            box.appendChild(el);
-            console.debug("[BOTzVN warm-up] IFRAME", url.split("/")[2]);
-          }, i * 1000);
-        });
-      })();
     </script>
   </body>
 </html>
