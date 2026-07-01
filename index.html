@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Primary Meta Tags -->
+  <title>BOTzVN — Anti-Detect Browser & Automation Platform</title>
+  <meta name="title" content="BOTzVN — Anti-Detect Browser & Automation Platform" />
+  <meta name="description"
+    content="BOTzVN is an anti-detect browser for automation at scale. Automate thousands of isolated browser profiles with advanced fingerprint protection, proxy integration, and enterprise-grade performance." />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://botzvn.github.io/browser/" />
+  <meta property="og:title" content="BOTzVN — Anti-Detect Browser & Automation Platform" />
+  <meta property="og:description"
+    content="BOTzVN is an anti-detect browser for automation at scale. Automate thousands of isolated browser profiles with advanced fingerprint protection, proxy integration, and enterprise-grade performance." />
+  <meta property="og:image" content="https://botzvn.github.io/browser/public/botzvn.png" />
+
+  <!-- X (Twitter) -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://botzvn.github.io/browser/" />
+  <meta property="twitter:title" content="BOTzVN — Anti-Detect Browser & Automation Platform" />
+  <meta property="twitter:description"
+    content="BOTzVN is an anti-detect browser for automation at scale. Automate thousands of isolated browser profiles with advanced fingerprint protection, proxy integration, and enterprise-grade performance." />
+  <meta property="twitter:image" content="https://botzvn.github.io/browser/public/botzvn.png" />
+
+  <!-- Meta Tags Generated with https://metatags.io -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Fira+Code:wght@300;400;500;600;700&amp;family=Caveat:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg viewBox='0 0 537 612' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='138' y1='-7' x2='138' y2='611' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%2371B9FF'/%3E%3Cstop offset='1' stop-color='%23348DFE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M249 44C249 32.3305 244.364 21.1389 236.113 12.8873C227.861 4.6357 216.67 0 205 0H318C340.711 5.67436e-05 355.561 2.05906 367.353 5.50037C379.145 8.94167 388.983 12.6473 399.547 20.4268C410.11 28.2063 419.497 38.8805 427.171 51.8399C434.846 64.7993 440.657 79.7901 444.274 95.9565C447.891 112.123 449.789 133.973 448.689 153.344C447.589 172.714 443.91 191.576 437.862 208.852C431.814 226.127 423.516 241.479 413.441 254.03C403.367 266.581 391.713 276.085 379.145 282C415.357 284.373 468.319 303.979 496.038 336.506C523.758 369.034 538.064 411.817 535.81 455.445C533.556 499.074 514.925 539.972 484.017 569.144C453.11 598.316 412.456 613.372 371 611H138L354 394H234L327.609 278H249V44Z' fill='url(%23g)'/%3E%3Cpath d='M50 0H205C216.67 0 227.861 4.6357 236.113 12.8873C244.364 21.1389 249 32.3305 249 44V278H50C36.7392 278 24.0215 272.732 14.6447 263.355C5.26783 253.979 0 241.261 0 228V50C0 36.7392 5.26783 24.0215 14.6447 14.6447C24.0215 5.26783 36.7392 0 50 0Z' fill='%23156EFE'/%3E%3Cpath d='M50 310H253L158 426H278L94 611H50C43.4339 611 36.9321 609.707 30.8658 607.194C24.7996 604.681 19.2876 600.998 14.6447 596.355C10.0017 591.712 6.31877 586.2 3.80603 580.134C1.2933 574.068 0 567.566 0 561V360C0 346.739 5.26783 334.021 14.6447 324.645C24.0215 315.268 36.7392 310 50 310Z' fill='%23156EFE'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --background: #08090f;
+      --foreground: #f8fafc;
+      --primary: #348dfe;
+      --primary-hover: #1e70e1;
+      --primary-faint: rgba(52, 141, 254, 0.08);
+      --primary-border: rgba(52, 141, 254, 0.25);
+      --card: rgba(18, 20, 32, 0.65);
+      --card-border: rgba(255, 255, 255, 0.06);
+      --sidebar: #0b0c13;
+      --muted-text: #94a3b8;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      --transition-normal: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --transition-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      --glow-primary: 0 0 35px rgba(52, 141, 254, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(52, 141, 254, 0.12) 0%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-glow-secondary {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(52, 141, 254, 0.06) 0%, transparent 60%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .layout-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 9, 15, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--foreground);
+      font-weight: 800;
+      font-size: 19px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+    }
+
+    .nav-link {
+      color: var(--muted-text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color var(--transition-normal);
+    }
+
+    .nav-link:hover {
+      color: var(--foreground);
+    }
+
+    .nav-actions {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .btn-github {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted-text);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition-normal);
+    }
+
+    .btn-github:hover {
+      border-color: var(--primary-border);
+      color: var(--foreground);
+      background: var(--primary-faint);
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all var(--transition-normal);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-download:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 0 20px rgba(52, 141, 254, 0.4);
+    }
+
+    .hero-section {
+      padding-top: 120px;
+      padding-bottom: 70px;
+      text-align: center;
+      position: relative;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes heroFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pre-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+
+
+    .hero-title {
+      font-size: clamp(34px, 6vw, 68px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      background: linear-gradient(to bottom, #ffffff 40%, rgba(255, 255, 255, 0.7));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 600px;
+      margin: 0 auto 36px;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--muted-text);
+      font-weight: 400;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .btn-hero-primary {
+      padding: 14px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 50px;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      transition: all var(--transition-normal);
+      box-shadow: var(--glow-primary);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-hero-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 0 45px rgba(52, 141, 254, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-hero-secondary {
+      padding: 14px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      color: var(--foreground);
+      text-decoration: none;
+      transition: all var(--transition-normal);
+    }
+
+    .btn-hero-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .platform-compatibility {
+      font-size: 12px;
+      color: rgba(148, 163, 184, 0.5);
+      margin-top: 16px;
+    }
+
+    .title-sub-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .title-sub-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      padding: 4px 14px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      background: var(--primary-faint);
+    }
+
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-text);
+      letter-spacing: 0.5px;
+    }
+
+    .admin-name {
+      color: var(--foreground);
+      font-weight: 800;
+    }
+
+    .try-me-badge {
+      position: absolute;
+      font-family: 'Caveat', cursive;
+      font-size: 20px;
+      color: var(--primary);
+      opacity: 0.85;
+      transform: rotate(-10deg);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Quick Start Box */
+    .quick-start-card {
+      max-width: 600px;
+      margin: 40px auto 0;
+      padding: 24px;
+      border: none;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .quick-start-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .quick-start-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: var(--foreground);
+      margin: 0;
+    }
+
+    .quick-start-desc {
+      color: var(--muted-text);
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .quick-start-code-box {
+      background: #040508;
+      border: 1px solid rgba(52, 141, 254, 0.25);
+      padding: 12px 40px 12px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      color: #ffffff;
+      text-align: left;
+      position: relative;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+      line-height: 1.6;
+    }
+
+    .quick-start-code {
+      margin: 0;
+      font-family: inherit;
+      font-size: 12px;
+      white-space: pre;
+      word-break: normal;
+      text-align: left;
+      display: block;
+      overflow-x: auto;
+    }
+
+    .quick-start-copy-btn {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      transition: all var(--transition-normal);
+    }
+
+    .quick-start-copy-btn:hover {
+      background: rgba(52, 141, 254, 0.1);
+    }
+
+    .mockup-section {
+      margin-bottom: 96px;
+      position: relative;
+    }
+
+    .mock-app-window {
+      --m-bg: #ffffff;
+      --m-sidebar-bg: #f8fafc;
+      --m-border: #e2e8f0;
+      --m-text: #0f172a;
+      --m-text-muted: #64748b;
+      --m-primary: #348dfe;
+      --m-primary-faint: rgba(52, 141, 254, 0.06);
+      --m-primary-border: rgba(52, 141, 254, 0.15);
+
+      border-radius: var(--radius-md);
+      border: none;
+      background: var(--m-bg);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), 0 0 50px rgba(52, 141, 254, 0.04);
+      overflow: hidden;
+      aspect-ratio: 16/8;
+      display: flex;
+      color: var(--m-text);
+      font-size: 12px;
+      max-width: 960px;
+      min-height: 520px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 992px) {
+      .mock-app-window {
+        aspect-ratio: auto;
+        min-height: 480px;
+      }
+    }
+
+    .mock-sidebar {
+      width: 210px;
+      border-right: 1px solid var(--m-border);
+      background: var(--m-sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      padding: 16px;
+      height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .mock-sidebar {
+        display: none;
+      }
+    }
+
+    .mock-brand-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .mock-brand-logo {
+      width: 24px;
+      height: 24px;
+    }
+
+    .mock-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mock-brand-title {
+      font-weight: 800;
+      font-size: 13px;
+      line-height: 1.1;
+      color: var(--m-text);
+    }
+
+    .mock-brand-subtitle {
+      font-size: 8px;
+      font-weight: 600;
+      color: var(--m-text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    .mock-node-selector {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--m-border);
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--m-text);
+      background: rgba(0, 0, 0, 0.03);
+      margin-bottom: 16px;
+      cursor: pointer;
+    }
+
+    .mock-node-selector .node-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mock-node-selector svg {
+      width: 14px;
+      height: 14px;
+      color: var(--m-primary);
+    }
+
+    .mock-sidebar-menu {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      overflow-y: auto;
+    }
+
+    .mock-menu-section-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--m-text-muted);
+      letter-spacing: 0.5px;
+      margin: 10px 0 4px 6px;
+    }
+
+    .mock-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      color: var(--m-text-muted);
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+    }
+
+    .mock-menu-item svg {
+      width: 14px;
+      height: 14px;
+      color: #64748b;
+      transition: color var(--transition-normal);
+    }
+
+    .mock-menu-item:hover {
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--m-text);
+    }
+
+    .mock-menu-item.active {
+      background: var(--m-primary-faint);
+      color: var(--m-primary);
+      border: 1px solid var(--m-primary-border);
+    }
+
+    .mock-menu-item.active svg {
+      color: var(--m-primary);
+    }
+
+    .mock-sidebar-footer {
+      border-top: 1px solid var(--m-border);
+      padding-top: 12px;
+      margin-top: auto;
+      font-size: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mock-pkg-badge-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .mock-pkg-badge {
+      font-weight: 700;
+      color: var(--m-text-muted);
+    }
+
+    .mock-pkg-upgrade {
+      background: rgba(253, 186, 116, 0.1);
+      border: 1px solid rgba(253, 186, 116, 0.25);
+      color: #fd9b33;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 9px;
+    }
+
+    .mock-pkg-stat {
+      color: var(--m-text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .mock-pkg-stat span {
+      font-weight: 700;
+      color: var(--m-text);
+    }
+
+    .mock-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--m-bg);
+      min-width: 0;
+    }
+
+    .mock-header {
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--m-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--m-sidebar-bg);
+      height: 48px;
+    }
+
+    .mock-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--m-text);
+    }
+
+    .mock-header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mock-lang-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--m-text);
+    }
+
+    .mock-theme-toggle {
+      color: var(--m-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .mock-theme-toggle svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .mock-user-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mock-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--m-primary-faint);
+      color: var(--m-primary);
+      border: 1px solid var(--m-primary-border);
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mock-user-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .mock-user-name {
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--m-text);
+    }
+
+    .mock-user-sub {
+      font-size: 8px;
+      color: var(--m-text-muted);
+    }
+
+    .mock-filters-bar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--m-border);
+      background: var(--m-sidebar-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .mock-filter-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--m-primary-faint);
+      color: var(--m-primary);
+      border: 1px solid var(--m-primary-border);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .mock-filter-tag .close-tag {
+      cursor: pointer;
+      font-weight: 700;
+      opacity: 0.7;
+    }
+
+    .mock-filter-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .mock-search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .mock-search-wrapper svg {
+      position: absolute;
+      left: 10px;
+      width: 13px;
+      height: 13px;
+      color: var(--m-text-muted);
+    }
+
+    .mock-search-input {
+      padding: 5px 10px 5px 28px;
+      border-radius: 6px;
+      border: 1px solid var(--m-border);
+      font-size: 11px;
+      width: 160px;
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--m-text);
+      outline: none;
+    }
+
+    .mock-icon-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--m-border);
+      background: rgba(0, 0, 0, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--m-text-muted);
+      cursor: pointer;
+    }
+
+    .mock-icon-btn svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .mock-bulk-import-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--m-border);
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--m-text);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .mock-bulk-import-btn svg {
+      width: 12px;
+      height: 12px;
+      color: var(--m-text-muted);
+    }
+
+    .mock-new-profile-btn {
+      padding: 5px 12px;
+      border-radius: 6px;
+      background: var(--m-primary);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+    }
+
+    .mock-table-container {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: auto;
+      background: var(--m-bg);
+    }
+
+    .mock-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .mock-table th {
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--m-text-muted);
+      border-bottom: 1px solid var(--m-border);
+      background: var(--m-sidebar-bg);
+    }
+
+    .mock-table td {
+      padding: 8px 16px;
+      border-bottom: 1px solid var(--m-border);
+      color: var(--m-text);
+      vertical-align: middle;
+    }
+
+    .mock-table tr:hover td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    .mock-table td.col-checkbox,
+    .mock-table th.col-checkbox {
+      width: 40px;
+      padding-right: 0;
+    }
+
+    .mock-table td.col-no,
+    .mock-table th.col-no {
+      width: 40px;
+      color: var(--m-text-muted);
+    }
+
+    .mock-table td input[type="checkbox"] {
+      cursor: pointer;
+    }
+
+    .profile-cell-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .row-start-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--m-border);
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--m-text);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+    }
+
+    .row-start-btn:hover {
+      border-color: var(--m-primary);
+      background: var(--m-primary-faint);
+    }
+
+    .row-start-btn svg {
+      width: 10px;
+      height: 10px;
+      fill: currentColor;
+    }
+
+    .row-start-btn.running {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+      color: #10b981;
+    }
+
+    .row-menu-dots {
+      color: var(--m-text-muted);
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 0 4px;
+    }
+
+    .row-device-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.04);
+      color: var(--m-text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      position: relative;
+    }
+
+    .row-device-icon.active::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      right: -2px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 1.5px solid var(--m-bg);
+    }
+
+    .row-profile-meta {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .row-profile-name {
+      font-weight: 700;
+      color: var(--m-text);
+    }
+
+    .row-profile-sub {
+      font-size: 9px;
+      color: var(--m-text-muted);
+      font-weight: 600;
+    }
+
+    .row-proxy-text {
+      font-size: 11px;
+      color: var(--m-text-muted);
+    }
+
+    .row-proxy-text.configured {
+      color: var(--m-text);
+    }
+
+    .mock-pagination {
+      padding: 10px 20px;
+      border-top: 1px solid var(--m-border);
+      background: var(--m-sidebar-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--m-text-muted);
+      height: 40px;
+    }
+
+    .mock-pagination-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .mock-pagination-select {
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--m-border);
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .mock-pagination-arrows {
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    .section-title-area {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-pre-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+
+    .section-main-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .section-main-title svg {
+      width: 1em;
+      height: 1em;
+      color: var(--primary);
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 12px;
+      transform: translateY(-2px);
+    }
+
+    .section-main-title span {
+      color: var(--primary);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      gap: 24px;
+      margin-bottom: 96px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 32px;
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 141, 254, 0.03);
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 45px rgba(52, 141, 254, 0.08);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--primary-faint);
+      border: 1px solid var(--primary-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--muted-text);
+      line-height: 1.6;
+    }
+
+    .showcase-area {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 32px;
+      margin-bottom: 96px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 992px) {
+      .showcase-area {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .code-panel {
+      border: none;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 141, 254, 0.03);
+      background: var(--sidebar);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .code-header {
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tab-buttons {
+      display: flex;
+    }
+
+    .tab-btn {
+      padding: 12px 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-text);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      transition: all var(--transition-normal);
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .code-copy-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      transition: all var(--transition-normal);
+    }
+
+    .code-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--foreground);
+    }
+
+    .code-content {
+      flex: 1;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .code-pane {
+      display: none;
+    }
+
+    .code-pane.active {
+      display: block;
+    }
+
+    .kw {
+      color: #c084fc;
+      font-weight: 600;
+    }
+
+    .str {
+      color: #34d399;
+    }
+
+    .cm {
+      color: #64748b;
+      font-style: italic;
+    }
+
+    .fn {
+      color: #60a5fa;
+    }
+
+    .nb {
+      color: #f59e0b;
+    }
+
+    .terminal-panel {
+      border: none;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 141, 254, 0.03);
+      background: #040508;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .terminal-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-body {
+      flex: 1;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #94a3b8;
+      overflow-y: auto;
+      min-height: 260px;
+      max-height: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 8px;
+      line-height: 1.6;
+    }
+
+    .terminal-prefix {
+      color: var(--primary);
+      user-select: none;
+    }
+
+    .terminal-text {
+      word-break: break-all;
+    }
+
+    .api-section {
+      margin-bottom: 96px;
+    }
+
+    .api-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 992px) {
+      .api-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .api-explorer {
+      border: none;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 141, 254, 0.03);
+      background: var(--card);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .api-explorer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(0, 0, 0, 0.15);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .api-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .api-item {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: background var(--transition-normal);
+    }
+
+    .api-item:last-child {
+      border-bottom: none;
+    }
+
+    .api-item:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .api-method {
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      width: 52px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .api-method.post {
+      background: rgba(52, 141, 254, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(52, 141, 254, 0.2);
+    }
+
+    .api-method.get {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted-text);
+      border: 1px solid var(--border);
+    }
+
+    .api-path {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--foreground);
+    }
+
+    .api-desc {
+      font-size: 12px;
+      color: var(--muted-text);
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .api-curl-panel {
+      border: none;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 0 30px rgba(52, 141, 254, 0.03);
+      background: var(--sidebar);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .api-curl-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-text);
+    }
+
+    .api-curl-body {
+      flex: 1;
+      padding: 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast {
+      background: rgba(15, 17, 26, 0.9);
+      border: 1px solid rgba(52, 141, 254, 0.2);
+      border-left: 3px solid var(--primary);
+      color: var(--foreground);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateX(120%);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: auto;
+      max-width: 320px;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 64px 0 48px;
+      text-align: center;
+      background: linear-gradient(to top, rgba(52, 141, 254, 0.015), transparent);
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--foreground);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-logo svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .footer-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--primary);
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted-text);
+      font-family: var(--font-mono);
+    }
+
+    @media (max-width: 768px) {
+      .layout-wrapper {
+        padding: 0 16px;
+      }
+
+      .pre-title {
+        font-size: 10px;
+        letter-spacing: 1px;
+      }
+
+      .desktop-only {
+        display: none !important;
+      }
+
+      .hero-glow {
+        width: 100vw;
+        height: 400px;
+        top: -50px;
+      }
+
+      .hero-glow-secondary {
+        width: 100vw;
+        height: 300px;
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 8vw, 48px);
+      }
+
+      /* Hide non-essential elements on mobile for a compact look */
+      .mock-lang-selector,
+      .mock-theme-toggle,
+      .mock-user-info,
+      .mock-filter-tag,
+      .mock-icon-btn:nth-child(3),
+      .mock-table th:nth-child(5),
+      .mock-table td:nth-child(5),
+      .mock-table th:nth-child(6),
+      .mock-table td:nth-child(6),
+      .mock-pagination>span:first-child,
+      .mock-pagination-select {
+        display: none !important;
+      }
+
+      .mock-header {
+        height: auto;
+        padding: 12px 16px;
+      }
+
+      .mock-filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .mock-filter-actions {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .mock-search-wrapper {
+        width: 100%;
+        order: -1;
+      }
+
+      .mock-search-input {
+        width: 100%;
+      }
+
+      .mock-new-profile-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 12px;
+      }
+
+      .mock-pagination {
+        height: auto;
+        padding: 12px;
+        justify-content: center;
+      }
+
+      .api-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px 8px;
+        align-items: flex-start;
+      }
+
+      .api-method {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+
+      .api-path {
+        grid-column: 1 / -1;
+        grid-row: 2;
+      }
+
+      .api-item svg {
+        grid-column: 1;
+        grid-row: 3;
+        margin-top: 3px;
+      }
+
+      .api-desc {
+        grid-column: 2;
+        grid-row: 3;
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .tab-btn {
+        padding: 10px 12px;
+      }
+
+      .quick-start-card {
+        padding: 16px;
+      }
+
+      .terminal-body {
+        min-height: 200px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="toast-container" id="toast-container"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-secondary"></div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <svg viewBox="0 0 537 612" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M249 44C249 32.3305 244.364 21.1389 236.113 12.8873C227.861 4.6357 216.67 0 205 0H318C340.711 5.67436e-05 355.561 2.05906 367.353 5.50037C379.145 8.94167 388.983 12.6473 399.547 20.4268C410.11 28.2063 419.497 38.8805 427.171 51.8399C434.846 64.7993 440.657 79.7901 444.274 95.9565C447.891 112.123 449.789 133.973 448.689 153.344C447.589 172.714 443.91 191.576 437.862 208.852C431.814 226.127 423.516 241.479 413.441 254.03C403.367 266.581 391.713 276.085 379.145 282C415.357 284.373 468.319 303.979 496.038 336.506C523.758 369.034 538.064 411.817 535.81 455.445C533.556 499.074 514.925 539.972 484.017 569.144C453.11 598.316 412.456 613.372 371 611H138L354 394H234L327.609 278H249V44Z"
+            fill="url(#paint0_linear_26_126)" />
+          <path
+            d="M50 0H205C216.67 0 227.861 4.6357 236.113 12.8873C244.364 21.1389 249 32.3305 249 44V278H50C36.7392 278 24.0215 272.732 14.6447 263.355C5.26783 253.979 0 241.261 0 228V50C0 36.7392 5.26783 24.0215 14.6447 14.6447C24.0215 5.26783 36.7392 0 50 0Z"
+            fill="#156EFE" />
+          <path
+            d="M50 310H253L158 426H278L94 611H50C43.4339 611 36.9321 609.707 30.8658 607.194C24.7996 604.681 19.2876 600.998 14.6447 596.355C10.0017 591.712 6.31877 586.2 3.80603 580.134C1.2933 574.068 0 567.566 0 561V360C0 346.739 5.26783 334.021 14.6447 324.645C24.0215 315.268 36.7392 310 50 310Z"
+            fill="#156EFE" />
+          <defs>
+            <linearGradient id="paint0_linear_26_126" x1="138" y1="-7.01953" x2="138" y2="611.244"
+              gradientUnits="userSpaceOnUse">
+              <stop stop-color="#71B9FF" />
+              <stop offset="1" stop-color="#348DFE" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </a>
+      <div class="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#automation" class="nav-link">Automation</a>
+        <a href="#api" class="nav-link">API</a>
+      </div>
+      <div class="nav-actions">
+        <a href="https://github.com/botzvn/browser-manager" target="_blank" rel="noopener noreferrer"
+          class="btn-github">
+          <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+          <span>Star</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout-wrapper">
+    <section class="hero-section">
+      <div class="fade-in pre-title" style="animation-delay: 0ms;">
+        ANTI-DETECT &nbsp;•&nbsp; <span class="desktop-only">MULTI-PROFILE &nbsp;•&nbsp; </span>AUTOMATION</div>
+      <h1 class="fade-in hero-title" style="animation-delay: 100ms;">
+        Browser for<br>
+        <span style="color: #d0e4ff; -webkit-text-fill-color: #d0e4ff;">Automation at Scale</span>
+      </h1>
+      <div class="fade-in quick-start-card" style="animation-delay: 250ms;">
+        <div class="quick-start-header">
+          <span>✨</span>
+          <h2 class="quick-start-title">QUICK START</h2>
+          <span>✨</span>
+        </div>
+        <p class="quick-start-desc">Run the following command to test the browser via Docker:</p>
+        <div class="quick-start-code-box">
+          <pre class="quick-start-code"><span style="color: var(--primary);">docker run</span> --platform linux/amd64 -d --name botzvn -p 8080:8080 \
+  --shm-size 1g -v botzvn-data:/data botzvn/browser-aio:latest</pre>
+          <button class="quick-start-copy-btn"
+            onclick="navigator.clipboard.writeText('docker run --platform linux/amd64 -d --name botzvn -p 8080:8080 --shm-size 1g -v botzvn-data:/data botzvn/browser-aio:latest'); toast.show('Docker command copied to clipboard');"
+            title="Copy command">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mock app dashboard -->
+    <section class="mockup-section">
+
+      <div class="mock-app-window">
+        <div class="mock-sidebar">
+          <div class="mock-brand-header">
+            <div class="mock-brand-logo">
+              <svg viewBox="0 0 537 612" fill="none" xmlns="http://www.w3.org/2000/svg"
+                style="width: 100%; height: 100%;">
+                <path
+                  d="M249 44C249 32.3305 244.364 21.1389 236.113 12.8873C227.861 4.6357 216.67 0 205 0H318C340.711 5.67436e-05 355.561 2.05906 367.353 5.50037C379.145 8.94167 388.983 12.6473 399.547 20.4268C410.11 28.2063 419.497 38.8805 427.171 51.8399C434.846 64.7993 440.657 79.7901 444.274 95.9565C447.891 112.123 449.789 133.973 448.689 153.344C447.589 172.714 443.91 191.576 437.862 208.852C431.814 226.127 423.516 241.479 413.441 254.03C403.367 266.581 391.713 276.085 379.145 282C415.357 284.373 468.319 303.979 496.038 336.506C523.758 369.034 538.064 411.817 535.81 455.445C533.556 499.074 514.925 539.972 484.017 569.144C453.11 598.316 412.456 613.372 371 611H138L354 394H234L327.609 278H249V44Z"
+                  fill="url(#mock_paint0)" />
+                <path
+                  d="M50 0H205C216.67 0 227.861 4.6357 236.113 12.8873C244.364 21.1389 249 32.3305 249 44V278H50C36.7392 278 24.0215 272.732 14.6447 263.355C5.26783 253.979 0 241.261 0 228V50C0 36.7392 5.26783 24.0215 14.6447 14.6447C24.0215 5.26783 36.7392 0 50 0Z"
+                  fill="#156EFE" />
+                <path
+                  d="M50 310H253L158 426H278L94 611H50C43.4339 611 36.9321 609.707 30.8658 607.194C24.7996 604.681 19.2876 600.998 14.6447 596.355C10.0017 591.712 6.31877 586.2 3.80603 580.134C1.2933 574.068 0 567.566 0 561V360C0 346.739 5.26783 334.021 14.6447 324.645C24.0215 315.268 36.7392 310 50 310Z"
+                  fill="#156EFE" />
+                <defs>
+                  <linearGradient id="mock_paint0" x1="138" y1="-7.01953" x2="138" y2="611.244"
+                    gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#71B9FF" />
+                    <stop offset="1" stop-color="#348DFE" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <div class="mock-brand-text">
+              <span class="mock-brand-title">BOTzVN</span>
+              <span class="mock-brand-subtitle">BROWSER MANAGER</span>
+            </div>
+          </div>
+
+          <div class="mock-node-selector">
+            <div class="node-left">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                </path>
+              </svg>
+              <span>All Worker Nodes</span>
+            </div>
+            <span style="font-size: 8px;">▾</span>
+          </div>
+
+          <div class="mock-sidebar-menu">
+            <div class="mock-menu-item active">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="9"></rect>
+                <rect x="14" y="3" width="7" height="5"></rect>
+                <rect x="14" y="12" width="7" height="9"></rect>
+                <rect x="3" y="16" width="7" height="5"></rect>
+              </svg>
+              <span>Profiles</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                </path>
+              </svg>
+              <span>Proxy</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+              <span>Groups</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+              <span>API</span>
+            </div>
+
+            <div class="mock-menu-section-label">EFFICIENCY</div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                </path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+              <span>Extensions</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+              </svg>
+              <span>Synchronizer</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <span>Automation</span>
+            </div>
+            <div class="mock-menu-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span>Tasks</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mock-main">
+          <div class="mock-header">
+            <div class="mock-header-title">Profiles</div>
+            <div class="mock-header-right">
+              <div class="mock-lang-selector">🇬🇧 EN ▾</div>
+              <div class="mock-theme-toggle">
+                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </div>
+              <div class="mock-user-profile">
+                <div class="mock-avatar">HN</div>
+                <div class="mock-user-info">
+                  <span class="mock-user-name">Hieu Nguyen</span>
+                  <span class="mock-user-sub">All Worker Nodes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-filters-bar">
+            <div class="mock-filter-tag">All <span class="close-tag">×</span></div>
+            <div class="mock-filter-actions">
+              <div class="mock-search-wrapper">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input class="mock-search-input" type="text" placeholder="Search profiles..." readonly />
+              </div>
+              <button class="mock-icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+              </button>
+              <button class="mock-icon-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <polyline points="1.01 20 1.01 14 7.01 14"></polyline>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                </svg>
+              </button>
+              <button class="mock-bulk-import-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" x2="12" y1="15" y2="3"></line>
+                </svg>
+                Bulk import
+              </button>
+              <button class="mock-new-profile-btn">New profile</button>
+            </div>
+          </div>
+
+          <div class="mock-table-container">
+            <table class="mock-table">
+              <thead>
+                <tr>
+                  <th class="col-checkbox"><input type="checkbox" disabled /></th>
+                  <th class="col-no">NO.</th>
+                  <th>PROFILES</th>
+                  <th>PROXY</th>
+                  <th>NOTES</th>
+                  <th>TAGS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr id="row-p1">
+                  <td class="col-checkbox"><input type="checkbox" disabled /></td>
+                  <td class="col-no">1</td>
+                  <td>
+                    <div class="profile-cell-wrapper">
+                      <button class="row-start-btn"
+                        onclick="window.open('https://github.com/botzvn/browser-manager', '_blank')">
+                        <svg viewBox="0 0 24 24">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Start</span>
+                      </button>
+                      <span class="row-menu-dots">⋮</span>
+                      <div class="row-device-icon">🤖</div>
+                      <div class="row-profile-meta">
+                        <span class="row-profile-name">android</span>
+                        <span class="row-profile-sub">• ALL</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="row-proxy-text" id="proxy-p1">Not configured</td>
+                  <td class="row-proxy-text">--</td>
+                  <td class="row-proxy-text">--</td>
+                </tr>
+                <tr id="row-p2">
+                  <td class="col-checkbox"><input type="checkbox" disabled /></td>
+                  <td class="col-no">2</td>
+                  <td>
+                    <div class="profile-cell-wrapper">
+                      <button class="row-start-btn"
+                        onclick="window.open('https://github.com/botzvn/browser-manager', '_blank')">
+                        <svg viewBox="0 0 24 24">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Start</span>
+                      </button>
+                      <span class="row-menu-dots">⋮</span>
+                      <div class="row-device-icon">💻</div>
+                      <div class="row-profile-meta">
+                        <span class="row-profile-name">mac</span>
+                        <span class="row-profile-sub">• ALL</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="row-proxy-text" id="proxy-p2">Not configured</td>
+                  <td class="row-proxy-text">--</td>
+                  <td class="row-proxy-text">--</td>
+                </tr>
+                <tr id="row-p3">
+                  <td class="col-checkbox"><input type="checkbox" disabled /></td>
+                  <td class="col-no">3</td>
+                  <td>
+                    <div class="profile-cell-wrapper">
+                      <button class="row-start-btn"
+                        onclick="window.open('https://github.com/botzvn/browser-manager', '_blank')">
+                        <svg viewBox="0 0 24 24">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Start</span>
+                      </button>
+                      <span class="row-menu-dots">⋮</span>
+                      <div class="row-device-icon">🐧</div>
+                      <div class="row-profile-meta">
+                        <span class="row-profile-name">linux</span>
+                        <span class="row-profile-sub">• ALL</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="row-proxy-text" id="proxy-p3">Not configured</td>
+                  <td class="row-proxy-text">--</td>
+                  <td class="row-proxy-text">--</td>
+                </tr>
+                <tr id="row-p4">
+                  <td class="col-checkbox"><input type="checkbox" disabled /></td>
+                  <td class="col-no">4</td>
+                  <td>
+                    <div class="profile-cell-wrapper">
+                      <button class="row-start-btn"
+                        onclick="window.open('https://github.com/botzvn/browser-manager', '_blank')">
+                        <svg viewBox="0 0 24 24">
+                          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <span>Start</span>
+                      </button>
+                      <span class="row-menu-dots">⋮</span>
+                      <div class="row-device-icon">🪟</div>
+                      <div class="row-profile-meta">
+                        <span class="row-profile-name">win</span>
+                        <span class="row-profile-sub">• ALL</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="row-proxy-text" id="proxy-p4">Not configured</td>
+                  <td class="row-proxy-text">--</td>
+                  <td class="row-proxy-text">--</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mock-pagination">
+            <span>Showing 4 of 4 profiles</span>
+            <div class="mock-pagination-right">
+              <span class="mock-pagination-select">50 ▾</span>
+              <span class="mock-pagination-arrows">◀ 1/1 ▶</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Features section restored from original version -->
+    <section id="features">
+      <div class="section-title-area">
+        <div class="section-pre-title">Platform Capabilities</div>
+        <h2 class="section-main-title">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+            <rect x="9" y="9" width="6" height="6"></rect>
+            <line x1="9" y1="1" x2="9" y2="4"></line>
+            <line x1="15" y1="1" x2="15" y2="4"></line>
+            <line x1="9" y1="20" x2="9" y2="23"></line>
+            <line x1="15" y1="20" x2="15" y2="23"></line>
+            <line x1="20" y1="9" x2="23" y2="9"></line>
+            <line x1="20" y1="15" x2="23" y2="15"></line>
+            <line x1="1" y1="9" x2="4" y2="9"></line>
+            <line x1="1" y1="15" x2="4" y2="15"></line>
+          </svg>Core features
+        </h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Unique Fingerprints</h3>
+          <p class="feature-desc">Every profile appears as a different device to websites. Bypass fingerprinting checks
+            on major platforms reliably.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <h3 class="feature-title">Zero Contamination</h3>
+          <p class="feature-desc">Cookies, history, sessions, and logins are completely separated between profiles. One
+            profile cannot expose another.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+              </path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Dedicated Proxies</h3>
+          <p class="feature-desc">Assign a different IP to each profile. Supports HTTP, HTTPS, SOCKS5 proxies. Your real
+            IP is never exposed.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3 class="feature-title">Automate Any Task</h3>
+          <p class="feature-desc">Connect Puppeteer, Playwright, or any automation script to any profile. Run bulk
+            actions undetected.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Data Stays Local</h3>
+          <p class="feature-desc">All profiles are encrypted and locked to your device. Nobody can access your accounts
+            or session data.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polygon points="12 17 2 12 12 17 22 12 12 17"></polygon>
+              <polygon points="12 22 2 17 12 22 22 17 12 22"></polygon>
+            </svg>
+          </div>
+          <h3 class="feature-title">Control 100+ Profiles</h3>
+          <p class="feature-desc">Perform the same action across hundreds of profiles simultaneously with one click —
+            all in real-time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automation Showcase section restored from original version -->
+    <section id="automation" class="mockup-section">
+      <div class="section-title-area">
+        <div class="section-pre-title">Developer Integration</div>
+        <h2 class="section-main-title">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>Automation showcase
+        </h2>
+      </div>
+      <div class="showcase-area">
+        <div class="code-panel">
+          <div class="code-header">
+            <div class="tab-buttons">
+              <button class="tab-btn active" onclick="switchTab('node')">Node.js</button>
+              <button class="tab-btn" onclick="switchTab('python')">Python</button>
+              <button class="tab-btn" onclick="switchTab('go')">Go</button>
+            </div>
+            <button class="code-copy-btn" onclick="copyActiveCode()" title="Copy Code">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="code-content">
+            <div class="code-pane active" id="code-node">
+              <span class="cm">// Connect Playwright to a BOTzVN profile via CDP</span><br>
+              <span class="kw">const</span> { chromium } = <span class="fn">require</span>(<span
+                class="str">'playwright'</span>);<br><br>
+              <span class="kw">async function</span> <span class="fn">runProfile</span>(wsEndpoint) {<br>
+              &nbsp;&nbsp;<span class="kw">const</span> browser = <span class="kw">await</span> chromium.<span
+                class="fn">connectOverCDP</span>(wsEndpoint);<br>
+              &nbsp;&nbsp;<span class="kw">const</span> context = browser.<span class="fn">contexts</span>()[<span
+                class="nb">0</span>];<br>
+              &nbsp;&nbsp;<span class="kw">const</span> page = <span class="kw">await</span> context.<span
+                class="fn">newPage</span>();<br><br>
+              &nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">goto</span>(<span
+                class="str">'https://www.wikipedia.org/'</span>);<br>
+              }
+            </div>
+            <div class="code-pane" id="code-python">
+              <span class="cm"># Connect Playwright to a BOTzVN profile via CDP</span><br>
+              <span class="kw">from</span> playwright.async_api <span class="kw">import</span> async_playwright<br>
+              <span class="kw">import</span> asyncio<br><br>
+              <span class="kw">async def</span> <span class="fn">run_profile</span>(ws_endpoint):<br>
+              &nbsp;&nbsp;<span class="kw">async with</span> async_playwright() <span class="kw">as</span> p:<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;browser = <span class="kw">await</span> p.chromium.<span
+                class="fn">connect_over_cdp</span>(ws_endpoint)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;ctx = browser.contexts[<span class="nb">0</span>]<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;page = <span class="kw">await</span> ctx.<span
+                class="fn">new_page</span>()<br><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">await</span> page.<span class="fn">goto</span>(<span
+                class="str">"https://www.wikipedia.org/"</span>)
+            </div>
+            <div class="code-pane" id="code-go">
+              <span class="cm">// Connect Playwright to a BOTzVN profile via CDP</span><br>
+              <span class="kw">package</span> main<br><br>
+              <span class="kw">import</span> (<br>
+              &nbsp;&nbsp;<span class="str">"log"</span><br>
+              &nbsp;&nbsp;<span class="str">"github.com/playwright-community/playwright-go"</span><br>
+              )<br><br>
+              <span class="kw">func</span> <span class="fn">main</span>() {<br>
+              &nbsp;&nbsp;pw, _ := playwright.<span class="fn">Run</span>()<br>
+              &nbsp;&nbsp;browser, _ := pw.Chromium.<span class="fn">ConnectOverCDP</span>(<span
+                class="str">"ws://127.0.0.1:49222"</span>)<br>
+              &nbsp;&nbsp;ctx := browser.<span class="fn">Contexts</span>()[<span class="nb">0</span>]<br>
+              &nbsp;&nbsp;page, _ := ctx.<span class="fn">NewPage</span>()<br>
+              &nbsp;&nbsp;page.<span class="fn">Goto</span>(<span class="str">"https://www.wikipedia.org/"</span>)<br>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal-panel">
+          <div class="terminal-header">
+            <div class="terminal-dot" style="background: #ef4444;"></div>
+            <div class="terminal-dot" style="background: #eab308;"></div>
+            <div class="terminal-dot" style="background: #22c55e;"></div>
+            <span
+              style="font-size: 11px; margin-left: 10px; color: rgba(255,255,255,0.3); font-family: var(--font-mono)">botzvn-cli</span>
+          </div>
+          <div class="terminal-body" id="terminal-log">
+            <div class="terminal-line">
+              <span class="terminal-prefix">$</span>
+              <span class="terminal-text">botzvn start --profile-id android</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prefix">ℹ</span>
+              <span class="terminal-text" style="color: #60a5fa;">Verifying local chrome engine dependencies...</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prefix">✔</span>
+              <span class="terminal-text" style="color: #34d399;">Engine initialized successfully.</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prefix">ℹ</span>
+              <span class="terminal-text" style="color: #f59e0b;">Establishing secure proxy tunnel...</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prefix">✔</span>
+              <span class="terminal-text" style="color: #34d399;">Proxy tunnel connected.</span>
+            </div>
+            <div class="terminal-line">
+              <span class="terminal-prefix">✔</span>
+              <span class="terminal-text" style="color: #34d399;">CDP debugger listening on:
+                ws://127.0.0.1:49222/playwright</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REST API explorer panel -->
+    <section id="api" class="api-section">
+      <div class="section-title-area">
+        <div class="section-pre-title">REST API</div>
+        <h2 class="section-main-title">
+          <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>Developer API
+        </h2>
+      </div>
+      <div class="api-grid">
+        <div class="api-explorer">
+          <div class="api-explorer-header">Localhost Server Endpoints</div>
+          <div class="api-list">
+            <div class="api-item">
+              <span class="api-method get">GET</span>
+              <span class="api-path">/api/v1/profiles</span>
+              <span class="api-desc">Get all browser profiles and status</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="opacity: 0.5; flex-shrink: 0; color: var(--muted-text);">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+            <div class="api-item">
+              <span class="api-method post">POST</span>
+              <span class="api-path">/api/v1/profiles</span>
+              <span class="api-desc">Create a new local browser profile</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="opacity: 0.5; flex-shrink: 0; color: var(--muted-text);">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
+            </div>
+            <div class="api-item">
+              <span class="api-method post">POST</span>
+              <span class="api-path">/api/v1/profiles/:id/start</span>
+              <span class="api-desc">Launch profile and open CDP debugging port</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="opacity: 0.5; flex-shrink: 0; color: var(--muted-text);">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </div>
+            <div class="api-item">
+              <span class="api-method post">POST</span>
+              <span class="api-path">/api/v1/profiles/:id/stop</span>
+              <span class="api-desc">Stop isolated browser profile session</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="opacity: 0.5; flex-shrink: 0; color: var(--muted-text);">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <div class="api-item">
+              <span class="api-method post">POST</span>
+              <span class="api-path">/api/v1/profiles/create-and-start</span>
+              <span class="api-desc">Create and start a profile immediately</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none"
+                stroke-linecap="round" stroke-linejoin="round"
+                style="opacity: 0.5; flex-shrink: 0; color: var(--muted-text);">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <line x1="19" y1="8" x2="19" y2="14"></line>
+                <line x1="22" y1="11" x2="16" y2="11"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="api-curl-panel">
+          <div class="api-curl-header">
+            <span>Start Profile Command</span>
+            <span>cURL</span>
+          </div>
+          <pre class="api-curl-body"><code>curl -X POST http://127.0.0.1:49222/api/v1/profiles/p1/start \
+  -H "Content-Type: application/json" \
+  -d '{
+    "proxy": "http://user:pass@ip:port",
+    "headless": false
+  }'</code></pre>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      <svg viewBox="0 0 537 612" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M249 44C249 32.3305 244.364 21.1389 236.113 12.8873C227.861 4.6357 216.67 0 205 0H318C340.711 5.67436e-05 355.561 2.05906 367.353 5.50037C379.145 8.94167 388.983 12.6473 399.547 20.4268C410.11 28.2063 419.497 38.8805 427.171 51.8399C434.846 64.7993 440.657 79.7901 444.274 95.9565C447.891 112.123 449.789 133.973 448.689 153.344C447.589 172.714 443.91 191.576 437.862 208.852C431.814 226.127 423.516 241.479 413.441 254.03C403.367 266.581 391.713 276.085 379.145 282C415.357 284.373 468.319 303.979 496.038 336.506C523.758 369.034 538.064 411.817 535.81 455.445C533.556 499.074 514.925 539.972 484.017 569.144C453.11 598.316 412.456 613.372 371 611H138L354 394H234L327.609 278H249V44Z"
+          fill="url(#footer_paint0)" />
+        <path
+          d="M50 0H205C216.67 0 227.861 4.6357 236.113 12.8873C244.364 21.1389 249 32.3305 249 44V278H50C36.7392 278 24.0215 272.732 14.6447 263.355C5.26783 253.979 0 241.261 0 228V50C0 36.7392 5.26783 24.0215 14.6447 14.6447C24.0215 5.26783 36.7392 0 50 0Z"
+          fill="#156EFE" />
+        <path
+          d="M50 310H253L158 426H278L94 611H50C43.4339 611 36.9321 609.707 30.8658 607.194C24.7996 604.681 19.2876 600.998 14.6447 596.355C10.0017 591.712 6.31877 586.2 3.80603 580.134C1.2933 574.068 0 567.566 0 561V360C0 346.739 5.26783 334.021 14.6447 324.645C24.0215 315.268 36.7392 310 50 310Z"
+          fill="#156EFE" />
+        <defs>
+          <linearGradient id="footer_paint0" x1="138" y1="-7.01953" x2="138" y2="611.244"
+            gradientUnits="userSpaceOnUse">
+            <stop stop-color="#71B9FF" />
+            <stop offset="1" stop-color="#348DFE" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="footer-divider"></div>
+    <p class="footer-copy">© 2026 BOTzVN — Anti-Detect Browser.</p>
+  </footer>
+
+  <script>
+    class ToastNotification {
+      constructor(containerId) {
+        this.container = document.getElementById(containerId);
+      }
+
+      show(message, duration = 3000) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<span style="color: #348dfe;">✓</span> <span>${message}</span>`;
+        this.container.appendChild(toast);
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            toast.classList.add('show');
+          });
+        });
+
+        setTimeout(() => {
+          toast.classList.remove('show');
+          setTimeout(() => {
+            if (toast.parentNode) {
+              toast.parentNode.removeChild(toast);
+            }
+          }, 400);
+        }, duration);
+      }
+    }
+
+    const toast = new ToastNotification('toast-container');
+
+
+
+    /* Toggles visible tab panels in the code showcase section */
+    function switchTab(langId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.code-pane').forEach(pane => pane.classList.remove('active'));
+
+      const activeBtn = Array.from(document.querySelectorAll('.tab-btn')).find(btn => btn.innerText.toLowerCase().includes(langId));
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+
+      const pane = document.getElementById('code-' + langId);
+      if (pane) {
+        pane.classList.add('active');
+      }
+    }
+
+    /* Copies text contents of the active tab to clipboard */
+    function copyActiveCode() {
+      const activePane = document.querySelector('.code-pane.active');
+      if (activePane) {
+        const text = activePane.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          toast.show('Code snippet copied to clipboard');
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>
